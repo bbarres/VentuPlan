@@ -8,7 +8,6 @@
 library(rgdal)
 library(rgeos)
 library(plotrix)
-library(classInt)
 library(mapplots)
 
 
@@ -20,9 +19,8 @@ library(mapplots)
 load("data/departe.RData")
 
 #load the resistance results
-ven_germ<-read.table("data/venturia_germ.txt",header=TRUE,sep="\t",
-                     colClasses=c("factor","character","character"))
-ven_myc<-read.table("data/venturia_myc.txt",header=TRUE,sep="\t")
+ven_moni<-read.table("data/venturia_monito.txt",header=TRUE,sep="\t",
+                       colClasses=c("factor","character","character"))
 
 #extract the department coordinates
 ind_list<-departe$INSEE_DEP
@@ -41,14 +39,14 @@ coorddep<-cbind("dep_ID"=ind_list,coorddep)
 ###############################################################################
 
 #producing the map
-QoIdata<-cbind("dep_ID"=row.names(table(ven_germ$dptmt,
-                                        ven_germ$QoI,exclude="")),
-               "Resistant"=table(ven_germ$dptmt,
-                                 ven_germ$QoI,exclude="")[,1],
-               "Sensible"=table(ven_germ$dptmt,
-                                ven_germ$QoI,exclude="")[,2],
-               "Total"=rowSums(table(ven_germ$dptmt,
-                                     ven_germ$QoI,exclude="")))
+QoIdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
+                                        ven_moni$QoI,exclude="")),
+               "Resistant"=table(ven_moni$dptmt,
+                                 ven_moni$QoI,exclude="")[,1],
+               "Sensible"=table(ven_moni$dptmt,
+                                ven_moni$QoI,exclude="")[,2],
+               "Total"=rowSums(table(ven_moni$dptmt,
+                                     ven_moni$QoI,exclude="")))
 
 data2map<-merge(QoIdata,coorddep,by="dep_ID")
 
@@ -63,9 +61,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
 par(op)
 
 #producing the barplot
-datXyear<-t(prop.table(table(ven_germ$year,ven_germ$QoI,exclude=""),
+datXyear<-t(prop.table(table(ven_moni$year,ven_moni$QoI,exclude=""),
                        margin=1)*100)
-totalyear<-rowSums(table(ven_germ$year,ven_germ$QoI,exclude=""))
+totalyear<-rowSums(table(ven_moni$year,ven_moni$QoI,exclude=""))
 temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="QoI",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
@@ -86,14 +84,14 @@ text(temp[11],103,paste("n=",totalyear[11],sep=""),font=3,cex=1,xpd=TRUE)
 ###############################################################################
 
 #producing the map
-APdata<-cbind("dep_ID"=row.names(table(ven_germ$dptmt,
-                                       ven_germ$AP,exclude="")),
-               "Resistant"=table(ven_germ$dptmt,
-                                 ven_germ$AP,exclude="")[,1],
-               "Sensible"=table(ven_germ$dptmt,
-                                ven_germ$AP,exclude="")[,2],
-               "Total"=rowSums(table(ven_germ$dptmt,
-                                     ven_germ$AP,exclude="")))
+APdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
+                                       ven_moni$AP,exclude="")),
+               "Resistant"=table(ven_moni$dptmt,
+                                 ven_moni$AP,exclude="")[,1],
+               "Sensible"=table(ven_moni$dptmt,
+                                ven_moni$AP,exclude="")[,2],
+               "Total"=rowSums(table(ven_moni$dptmt,
+                                     ven_moni$AP,exclude="")))
 
 data2map<-merge(APdata,coorddep,by="dep_ID")
 
@@ -108,9 +106,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
 par(op)
 
 #producing the barplot
-datXyear<-t(prop.table(table(ven_germ$year,ven_germ$AP,exclude=""),
+datXyear<-t(prop.table(table(ven_moni$year,ven_moni$AP,exclude=""),
                        margin=1)*100)
-totalyear<-rowSums(table(ven_germ$year,ven_germ$AP,exclude=""))
+totalyear<-rowSums(table(ven_moni$year,ven_moni$AP,exclude=""))
 temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="AP",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
@@ -131,14 +129,14 @@ text(temp[11],103,paste("n=",totalyear[11],sep=""),font=3,cex=1,xpd=TRUE)
 ###############################################################################
 
 #producing the map
-CAPdata<-cbind("dep_ID"=row.names(table(ven_germ$dptmt,
-                                        ven_germ$captane,exclude="")),
-              "Resistant"=table(ven_germ$dptmt,
-                                ven_germ$captane,exclude="")[,1],
-              "Sensible"=table(ven_germ$dptmt,
-                               ven_germ$captane,exclude="")[,2],
-              "Total"=rowSums(table(ven_germ$dptmt,
-                                    ven_germ$captane,exclude="")))
+CAPdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
+                                        ven_moni$captane,exclude="")),
+              "Resistant"=table(ven_moni$dptmt,
+                                ven_moni$captane,exclude="")[,1],
+              "Sensible"=table(ven_moni$dptmt,
+                               ven_moni$captane,exclude="")[,2],
+              "Total"=rowSums(table(ven_moni$dptmt,
+                                    ven_moni$captane,exclude="")))
 
 data2map<-merge(CAPdata,coorddep,by="dep_ID")
 
@@ -153,9 +151,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
 par(op)
 
 #producing the barplot
-datXyear<-t(prop.table(table(ven_germ$year,ven_germ$captane,exclude=""),
+datXyear<-t(prop.table(table(ven_moni$year,ven_moni$captane,exclude=""),
                        margin=1)*100)
-totalyear<-rowSums(table(ven_germ$year,ven_germ$captane,exclude=""))
+totalyear<-rowSums(table(ven_moni$year,ven_moni$captane,exclude=""))
 temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="captane",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
@@ -176,12 +174,12 @@ text(temp[11],103,paste("n=",totalyear[11],sep=""),font=3,cex=1,xpd=TRUE)
 ###############################################################################
 
 #producing the map
-DITdata<-cbind("dep_ID"=row.names(table(ven_germ$dptmt,
-                                        ven_germ$dithianon,exclude="")),
-               "Sensible"=table(ven_germ$dptmt,
-                                ven_germ$dithianon,exclude="")[,1],
-               "Total"=rowSums(table(ven_germ$dptmt,
-                                     ven_germ$dithianon,exclude="")))
+DITdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
+                                        ven_moni$dithianon,exclude="")),
+               "Sensible"=table(ven_moni$dptmt,
+                                ven_moni$dithianon,exclude="")[,1],
+               "Total"=rowSums(table(ven_moni$dptmt,
+                                     ven_moni$dithianon,exclude="")))
 
 data2map<-merge(DITdata,coorddep,by="dep_ID")
 
@@ -196,9 +194,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
 par(op)
 
 #producing the barplot
-datXyear<-t(prop.table(table(ven_germ$year,ven_germ$dithianon,exclude=""),
+datXyear<-t(prop.table(table(ven_moni$year,ven_moni$dithianon,exclude=""),
                        margin=1)*100)
-totalyear<-rowSums(table(ven_germ$year,ven_germ$dithianon,exclude=""))
+totalyear<-rowSums(table(ven_moni$year,ven_moni$dithianon,exclude=""))
 temp<-barplot(datXyear,col=c("blue"),las=1,font=2,main="dithianon",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
@@ -219,14 +217,14 @@ text(temp[11],103,paste("n=",totalyear[11],sep=""),font=3,cex=1,xpd=TRUE)
 ###############################################################################
 
 #producing the map
-BOSdata<-cbind("dep_ID"=row.names(table(ven_germ$dptmt,
-                                        ven_germ$boscalid,exclude="")),
-               "Resistant"=table(ven_germ$dptmt,
-                                 ven_germ$boscalid,exclude="")[,1],
-               "Sensible"=table(ven_germ$dptmt,
-                                ven_germ$boscalid,exclude="")[,2],
-               "Total"=rowSums(table(ven_germ$dptmt,
-                                     ven_germ$boscalid,exclude="")))
+BOSdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
+                                        ven_moni$boscalid,exclude="")),
+               "Resistant"=table(ven_moni$dptmt,
+                                 ven_moni$boscalid,exclude="")[,1],
+               "Sensible"=table(ven_moni$dptmt,
+                                ven_moni$boscalid,exclude="")[,2],
+               "Total"=rowSums(table(ven_moni$dptmt,
+                                     ven_moni$boscalid,exclude="")))
 
 data2map<-merge(BOSdata,coorddep,by="dep_ID")
 
@@ -241,9 +239,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
 par(op)
 
 #producing the barplot
-datXyear<-t(prop.table(table(ven_germ$year,ven_germ$boscalid,exclude=""),
+datXyear<-t(prop.table(table(ven_moni$year,ven_moni$boscalid,exclude=""),
                        margin=1)*100)
-totalyear<-rowSums(table(ven_germ$year,ven_germ$boscalid,exclude=""))
+totalyear<-rowSums(table(ven_moni$year,ven_moni$boscalid,exclude=""))
 temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="boscalid",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
@@ -264,14 +262,14 @@ text(temp[11],103,paste("n=",totalyear[11],sep=""),font=3,cex=1,xpd=TRUE)
 ###############################################################################
 
 #producing the map
-DODdata<-cbind("dep_ID"=row.names(table(ven_germ$dptmt,
-                                        ven_germ$dodine,exclude="")),
-               "Resistant"=table(ven_germ$dptmt,
-                                 ven_germ$dodine,exclude="")[,1],
-               "Sensible"=table(ven_germ$dptmt,
-                                ven_germ$dodine,exclude="")[,2],
-               "Total"=rowSums(table(ven_germ$dptmt,
-                                     ven_germ$dodine,exclude="")))
+DODdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
+                                        ven_moni$dodine,exclude="")),
+               "Resistant"=table(ven_moni$dptmt,
+                                 ven_moni$dodine,exclude="")[,1],
+               "Sensible"=table(ven_moni$dptmt,
+                                ven_moni$dodine,exclude="")[,2],
+               "Total"=rowSums(table(ven_moni$dptmt,
+                                     ven_moni$dodine,exclude="")))
 
 data2map<-merge(DODdata,coorddep,by="dep_ID")
 
@@ -286,9 +284,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
 par(op)
 
 #producing the barplot
-datXyear<-t(prop.table(table(ven_germ$year,ven_germ$dodine,exclude=""),
+datXyear<-t(prop.table(table(ven_moni$year,ven_moni$dodine,exclude=""),
                        margin=1)*100)
-totalyear<-rowSums(table(ven_germ$year,ven_germ$dodine,exclude=""))
+totalyear<-rowSums(table(ven_moni$year,ven_moni$dodine,exclude=""))
 temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="dodine",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
@@ -309,14 +307,14 @@ text(temp[11],103,paste("n=",totalyear[11],sep=""),font=3,cex=1,xpd=TRUE)
 ###############################################################################
 
 #producing the map
-TEBdata<-cbind("dep_ID"=row.names(table(ven_germ$dptmt,
-                                        ven_germ$tebuconazole,exclude="")),
-               "Resistant"=table(ven_germ$dptmt,
-                                 ven_germ$tebuconazole,exclude="")[,1],
-               "Sensible"=table(ven_germ$dptmt,
-                                ven_germ$tebuconazole,exclude="")[,2],
-               "Total"=rowSums(table(ven_germ$dptmt,
-                                     ven_germ$tebuconazole,exclude="")))
+TEBdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
+                                        ven_moni$tebuconazole,exclude="")),
+               "Resistant"=table(ven_moni$dptmt,
+                                 ven_moni$tebuconazole,exclude="")[,1],
+               "Sensible"=table(ven_moni$dptmt,
+                                ven_moni$tebuconazole,exclude="")[,2],
+               "Total"=rowSums(table(ven_moni$dptmt,
+                                     ven_moni$tebuconazole,exclude="")))
 
 data2map<-merge(TEBdata,coorddep,by="dep_ID")
 
@@ -331,9 +329,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
 par(op)
 
 #producing the barplot
-datXyear<-t(prop.table(table(ven_germ$year,ven_germ$tebuconazole,exclude=""),
+datXyear<-t(prop.table(table(ven_moni$year,ven_moni$tebuconazole,exclude=""),
                        margin=1)*100)
-totalyear<-rowSums(table(ven_germ$year,ven_germ$tebuconazole,exclude=""))
+totalyear<-rowSums(table(ven_moni$year,ven_moni$tebuconazole,exclude=""))
 temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="tebuconazole",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
