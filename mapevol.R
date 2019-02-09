@@ -9,6 +9,7 @@ library(rgdal)
 library(rgeos)
 library(plotrix)
 library(mapplots)
+library(RColorBrewer)
 
 
 ###############################################################################
@@ -50,12 +51,13 @@ QoIdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(QoIdata,coorddep,by="dep_ID")
 
+colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
 op<-par(mar=c(0,0,0,0))
 plot(departe)
 draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
-         col=c("red","blue"),
+         col=colovec,
          radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
          labels=NA)
 par(op)
@@ -64,7 +66,7 @@ par(op)
 datXyear<-t(prop.table(table(ven_moni$year,ven_moni$QoI,exclude=""),
                        margin=1)*100)
 totalyear<-rowSums(table(ven_moni$year,ven_moni$QoI,exclude=""))
-temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="QoI",
+temp<-barplot(datXyear,col=colovec,las=1,font=2,main="QoI",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
 text(temp[2],103,paste("n=",totalyear[2],sep=""),font=3,cex=1,xpd=TRUE)
@@ -95,12 +97,13 @@ APdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(APdata,coorddep,by="dep_ID")
 
+colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
 op<-par(mar=c(0,0,0,0))
 plot(departe)
 draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
-         col=c("red","blue"),
+         col=colovec,
          radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
          labels=NA)
 par(op)
@@ -109,7 +112,7 @@ par(op)
 datXyear<-t(prop.table(table(ven_moni$year,ven_moni$AP,exclude=""),
                        margin=1)*100)
 totalyear<-rowSums(table(ven_moni$year,ven_moni$AP,exclude=""))
-temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="AP",
+temp<-barplot(datXyear,col=colovec,las=1,font=2,main="AP",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
 text(temp[2],103,paste("n=",totalyear[2],sep=""),font=3,cex=1,xpd=TRUE)
@@ -140,12 +143,13 @@ CAPdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(CAPdata,coorddep,by="dep_ID")
 
+colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
 op<-par(mar=c(0,0,0,0))
 plot(departe)
 draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                   (as.numeric(as.character(data2map$Sensible)))),
-         col=c("red","blue"),
+         col=colovec,
          radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
          labels=NA)
 par(op)
@@ -154,7 +158,7 @@ par(op)
 datXyear<-t(prop.table(table(ven_moni$year,ven_moni$captane,exclude=""),
                        margin=1)*100)
 totalyear<-rowSums(table(ven_moni$year,ven_moni$captane,exclude=""))
-temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="captane",
+temp<-barplot(datXyear,col=colovec,las=1,font=2,main="captane",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
 text(temp[2],103,paste("n=",totalyear[2],sep=""),font=3,cex=1,xpd=TRUE)
@@ -183,12 +187,13 @@ DITdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(DITdata,coorddep,by="dep_ID")
 
+colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
 op<-par(mar=c(0,0,0,0))
 plot(departe)
 draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Sensible))),
                  (as.numeric(as.character(data2map$Sensible)))),
-         col=c("blue"),
+         col=colovec[2],
          radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
          labels=NA)
 par(op)
@@ -197,7 +202,7 @@ par(op)
 datXyear<-t(prop.table(table(ven_moni$year,ven_moni$dithianon,exclude=""),
                        margin=1)*100)
 totalyear<-rowSums(table(ven_moni$year,ven_moni$dithianon,exclude=""))
-temp<-barplot(datXyear,col=c("blue"),las=1,font=2,main="dithianon",
+temp<-barplot(datXyear,col=colovec[2],las=1,font=2,main="dithianon",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
 text(temp[2],103,paste("n=",totalyear[2],sep=""),font=3,cex=1,xpd=TRUE)
@@ -228,12 +233,13 @@ BOSdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(BOSdata,coorddep,by="dep_ID")
 
+colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
 op<-par(mar=c(0,0,0,0))
 plot(departe)
 draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
-         col=c("red","blue"),
+         col=colovec,
          radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
          labels=NA)
 par(op)
@@ -242,7 +248,7 @@ par(op)
 datXyear<-t(prop.table(table(ven_moni$year,ven_moni$boscalid,exclude=""),
                        margin=1)*100)
 totalyear<-rowSums(table(ven_moni$year,ven_moni$boscalid,exclude=""))
-temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="boscalid",
+temp<-barplot(datXyear,col=colovec,las=1,font=2,main="boscalid",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
 text(temp[2],103,paste("n=",totalyear[2],sep=""),font=3,cex=1,xpd=TRUE)
@@ -273,12 +279,13 @@ DODdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(DODdata,coorddep,by="dep_ID")
 
+colovec<-c(brewer.pal(9,"Oranges")[7],brewer.pal(9,"Blues")[8])
 op<-par(mar=c(0,0,0,0))
 plot(departe)
 draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
-         col=c("red","blue"),
+         col=colovec,
          radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
          labels=NA)
 par(op)
@@ -287,7 +294,7 @@ par(op)
 datXyear<-t(prop.table(table(ven_moni$year,ven_moni$dodine,exclude=""),
                        margin=1)*100)
 totalyear<-rowSums(table(ven_moni$year,ven_moni$dodine,exclude=""))
-temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="dodine",
+temp<-barplot(datXyear,col=colovec,las=1,font=2,main="dodine",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
 text(temp[2],103,paste("n=",totalyear[2],sep=""),font=3,cex=1,xpd=TRUE)
@@ -318,12 +325,13 @@ TEBdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(TEBdata,coorddep,by="dep_ID")
 
+colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
 op<-par(mar=c(0,0,0,0))
 plot(departe)
 draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
-         col=c("red","blue"),
+         col=colovec,
          radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
          labels=NA)
 par(op)
@@ -332,7 +340,7 @@ par(op)
 datXyear<-t(prop.table(table(ven_moni$year,ven_moni$tebuconazole,exclude=""),
                        margin=1)*100)
 totalyear<-rowSums(table(ven_moni$year,ven_moni$tebuconazole,exclude=""))
-temp<-barplot(datXyear,col=c("red","blue"),las=1,font=2,main="tebuconazole",
+temp<-barplot(datXyear,col=colovec,las=1,font=2,main="tebuconazole",
               cex.main=2)
 text(temp[1],103,paste("n=",totalyear[1],sep=""),font=3,cex=1,xpd=TRUE)
 text(temp[2],103,paste("n=",totalyear[2],sep=""),font=3,cex=1,xpd=TRUE)
