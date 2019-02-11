@@ -159,7 +159,7 @@ CAPdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(CAPdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Oranges")[6],brewer.pal(9,"Blues")[8])
 png(file=paste("output/","captane_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
@@ -265,7 +265,7 @@ BOSdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(BOSdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Oranges")[6],brewer.pal(9,"Blues")[8])
 png(file=paste("output/","boscalid_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
@@ -319,7 +319,7 @@ DODdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(DODdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Oranges")[7],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Oranges")[6],brewer.pal(9,"Blues")[8])
 png(file=paste("output/","dodine_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
