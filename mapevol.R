@@ -51,7 +51,7 @@ QoIdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(QoIdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Reds")[5],brewer.pal(9,"Blues")[6])
 png(file=paste("output/","QoI_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
@@ -60,9 +60,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
          col=colovec,lty=0,
-         radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
+         radius=(sqrt(as.numeric(as.character(data2map$Total)))*10000),
          labels=NA)
-text(x=data2map$longitude,y=data2map$latitude,
+text(x=data2map$longitude,y=data2map$latitude,col="black",font=2,
      labels=as.character(data2map$Total),cex=0.7)
 par(op)
 dev.off()
@@ -105,7 +105,7 @@ APdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(APdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Reds")[5],brewer.pal(9,"Blues")[6])
 png(file=paste("output/","AP_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
@@ -114,9 +114,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
          col=colovec,lty=0,
-         radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
+         radius=(sqrt(as.numeric(as.character(data2map$Total)))*10000),
          labels=NA)
-text(x=data2map$longitude,y=data2map$latitude,
+text(x=data2map$longitude,y=data2map$latitude,col="black",font=2,
      labels=as.character(data2map$Total),cex=0.7)
 par(op)
 dev.off()
@@ -159,7 +159,7 @@ CAPdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(CAPdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Oranges")[6],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Oranges")[5],brewer.pal(9,"Blues")[6])
 png(file=paste("output/","captane_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
@@ -168,9 +168,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                   (as.numeric(as.character(data2map$Sensible)))),
          col=colovec,lty=0,
-         radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
+         radius=(sqrt(as.numeric(as.character(data2map$Total)))*10000),
          labels=NA)
-text(x=data2map$longitude,y=data2map$latitude,
+text(x=data2map$longitude,y=data2map$latitude,col="black",font=2,
      labels=as.character(data2map$Total),cex=0.7)
 par(op)
 dev.off()
@@ -211,7 +211,7 @@ DITdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(DITdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Reds")[5],brewer.pal(9,"Blues")[6])
 png(file=paste("output/","dithianon_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
@@ -220,9 +220,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Sensible))),
                  (as.numeric(as.character(data2map$Sensible)))),
          col=colovec[2],lty=0,
-         radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
+         radius=(sqrt(as.numeric(as.character(data2map$Total)))*10000),
          labels=NA)
-text(x=data2map$longitude,y=data2map$latitude,
+text(x=data2map$longitude,y=data2map$latitude,col="black",font=2,
      labels=as.character(data2map$Total),cex=0.7)
 par(op)
 dev.off()
@@ -265,7 +265,7 @@ BOSdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(BOSdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Oranges")[6],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Oranges")[5],brewer.pal(9,"Blues")[6])
 png(file=paste("output/","boscalid_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
@@ -274,9 +274,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
          col=colovec,lty=0,
-         radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
+         radius=(sqrt(as.numeric(as.character(data2map$Total)))*10000),
          labels=NA)
-text(x=data2map$longitude,y=data2map$latitude,
+text(x=data2map$longitude,y=data2map$latitude,col="black",font=2,
      labels=as.character(data2map$Total),cex=0.7)
 par(op)
 dev.off()
@@ -319,7 +319,7 @@ DODdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(DODdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Oranges")[6],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Oranges")[5],brewer.pal(9,"Blues")[6])
 png(file=paste("output/","dodine_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
@@ -328,9 +328,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
          col=colovec,lty=0,
-         radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
+         radius=(sqrt(as.numeric(as.character(data2map$Total)))*10000),
          labels=NA)
-text(x=data2map$longitude,y=data2map$latitude,
+text(x=data2map$longitude,y=data2map$latitude,col="black",font=2,
      labels=as.character(data2map$Total),cex=0.7)
 par(op)
 dev.off()
@@ -373,7 +373,7 @@ TEBdata<-cbind("dep_ID"=row.names(table(ven_moni$dptmt,
 
 data2map<-merge(TEBdata,coorddep,by="dep_ID")
 
-colovec<-c(brewer.pal(9,"Reds")[7],brewer.pal(9,"Blues")[8])
+colovec<-c(brewer.pal(9,"Reds")[5],brewer.pal(9,"Blues")[6])
 png(file=paste("output/","tebuco_venturia",".png",sep=""),
     width=4,height=4,units="in",res=300)
 op<-par(mar=c(0,0,0,0))
@@ -382,9 +382,9 @@ draw.pie(x=data2map$longitude,y=data2map$latitude,
          z=cbind((as.numeric(as.character(data2map$Resistant))),
                  (as.numeric(as.character(data2map$Sensible)))),
          col=colovec,lty=0,
-         radius=(sqrt(as.numeric(as.character(data2map$Total)))*8000),
+         radius=(sqrt(as.numeric(as.character(data2map$Total)))*10000),
          labels=NA)
-text(x=data2map$longitude,y=data2map$latitude,
+text(x=data2map$longitude,y=data2map$latitude,col="black",font=2,
      labels=as.character(data2map$Total),cex=0.7)
 par(op)
 dev.off()
