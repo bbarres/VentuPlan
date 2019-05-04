@@ -1,6 +1,6 @@
 ###############################################################################
 ###############################################################################
-#Basic code for plotting map of France
+#Analysis of the mycelial growth of the monospores of the 2018 Plan de Siurv
 ###############################################################################
 ###############################################################################
 
@@ -9,15 +9,13 @@ library(drc)
 library(plotrix)
 library(gdata)
 
-#loading the data
+#loading the data (the dataset only comprise one SA: dodine)
 dodmycgro<-read.table("data/ventuCroissMyc18.txt",header=TRUE,sep=";")
 
 
 ###############################################################################
-#An
+#Regression analysis
 ###############################################################################
-
-
 
 #some individual never reach an inhibition of 50%, event for the highest 
 #tested concentration. 
@@ -49,7 +47,8 @@ abline(refval/refval,0,col="green4",lwd=2)
 abline((10*refval)/refval,0,col="red",lwd=2)
 REZdod$FR<-REZdod$ED50/refval
 #export to pdf 10 x 6 inches
-write.table(REZdod,file="output/REZdodcroimyc18.txt",quote=FALSE,sep="\t",row.names=FALSE)
+write.table(REZdod,file="output/REZdodcroimyc18.txt",quote=FALSE,sep="\t",
+            row.names=FALSE)
 
 hist((REZdod$ED50[order(REZdod$ED50)])/refval,main="dodine",xlab="FR Classes",
      breaks=c(0,10,20,30,40,50,60,70,80),
