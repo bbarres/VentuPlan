@@ -22,7 +22,7 @@ load("data/departe.RData")
 
 #load the resistance results
 databrute <- read.table(
-  "data/ambroisie.txt",
+  "data/ambroisie_result2019.txt",
   header = TRUE,
   sep = "\t",
   colClasses = c("character", "character", "character",
@@ -100,10 +100,9 @@ draw.pie(
   lty = 1,               #line type of the pie
   border = "grey60",     #color of the border of the pie
   lwd = 0.1,             #control the width of the border
-  radius = (sqrt(as.numeric(
-    as.character(data2map$Total)
-  )) * 16000),           #this number control the radius of the pies
-  labels = NA
+  radius = 35000, #(sqrt(as.numeric(as.character(data2map$Total))) * 16000), #this number control the radius of the pies
+  labels = NA,
+  scale=FALSE # oui ou non le radius dépend des effectifs
 )
 
 #writing the number of samples for each departement
