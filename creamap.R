@@ -100,7 +100,8 @@ draw.pie(
   lty = 1,               #line type of the pie
   border = "grey60",     #color of the border of the pie
   lwd = 0.1,             #control the width of the border
-  radius = 35000, #(sqrt(as.numeric(as.character(data2map$Total))) * 16000), #this number control the radius of the pies
+  radius = 35000, #(sqrt(as.numeric(as.character(data2map$Total))) * 16000), 
+  #this number control the radius of the pies
   labels = NA,
   scale=FALSE # should the radius be scaled according to effectif
 )
