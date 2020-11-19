@@ -23,7 +23,8 @@ datamyc<-ventGerm20[ventGerm20$lect_echec!=1,]
 #first we extract the list of the different SA listed in the file
 SAlist<-levels(datamyc$pest_sa_id)
 #creating the empty result output file
-CompRez<-data.frame(Subs_Act=factor(),sample_ID=factor(),read_time=factor(),
+CompRez<-data.frame(Species=character(),Subs_Act=factor(),
+                    sample_ID=factor(),read_time=factor(),
                     ED50=character(),ED95=character(),ED99=character())
 
 #we make a subselection of the data according to the SA
@@ -36,11 +37,16 @@ for (j in 1:length(SAlist)) {
   SA_rez<-as.character(data_subSA[data_subSA$dose==max(data_subSA$dose) 
                                   & data_subSA$rslt_03>50,
                                   "ech_id"])
+  Esp_rez<-as.character(data_subSA[data_subSA$dose==max(data_subSA$dose) 
+                                  & data_subSA$rslt_03>50,
+                                  "bioagr_id"])
   ifelse(length(SA_rez)==0,
-         REZSA<-data.frame(Subs_Act=factor(),sample_ID=factor(),
+         REZSA<-data.frame(Species=character(),Subs_Act=factor(),
+                           sample_ID=factor(),
                            read_time=factor(),ED50=character(),
                            ED95=character(),ED99=character()),
-         REZSA<-data.frame("Subs_Act"=SAlist[j],"sample_ID"=SA_rez,
+         REZSA<-data.frame("Species"=Esp_rez,
+                           "Subs_Act"=SAlist[j],"sample_ID"=SA_rez,
                            "read_time"=data_subSA$tps_expo[1],
                            "ED50"=paste(">",max(data_subSA$dose),sep=""),
                            "ED95"=paste(">",max(data_subSA$dose),sep=""),
@@ -56,9 +62,11 @@ for (j in 1:length(SAlist)) {
                    data=tempdat,
                    fct=LL.3())
       plot(temp.m1,ylim=c(0,110),xlim=c(0,50),
-           main=paste(SAlist[j],names(table(SA.dat$ech_id))[i]))
+           main=paste(data_subSA$bioagr_id[1],
+                      SAlist[j],names(table(SA.dat$ech_id))[i]))
       temp<-ED(temp.m1,c(50,5,1),type="absolute")
-      tempx<-data.frame("Subs_Act"=SAlist[j],
+      tempx<-data.frame("Species"=data_subSA$bioagr_id[1],
+                        "Subs_Act"=SAlist[j],
                         "sample_ID"=names(table(SA.dat$ech_id))[i],
                         "read_time"=data_subSA$tps_expo[1],
                         "ED50"=as.character(temp[1]),
