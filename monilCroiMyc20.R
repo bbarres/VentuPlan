@@ -22,6 +22,9 @@ datamyc<-monilCroi20[monilCroi20$lect_echec!=1,]
 
 #first we extract the list of the different SA listed in the file
 SAlist<-levels(datamyc$pest_sa_id)
+#it seems that CARBENDAZIME tests were discriminant dose analyses, so 
+#we remove this active substance from the list
+SAlist<-SAlist[SAlist!="CARBENDAZIME"]
 #creating the empty result output file
 CompRez<-data.frame(Species=character(),Subs_Act=factor(),
                     sample_ID=factor(),read_time=factor(),
@@ -60,7 +63,7 @@ for (j in 1:length(SAlist)) {
       tempdat<-SA.dat[SA.dat$ech_id==names(table(SA.dat$ech_id))[i],]
       temp.m1<-drm(rslt_03~dose,
                    data=tempdat,
-                   fct=LL.3())
+                   fct=LL.4())
       plot(temp.m1,ylim=c(0,110),xlim=c(0,50),
            main=paste(data_subSA$bioagr_id[1],
                       SAlist[j],names(table(SA.dat$ech_id))[i]))
