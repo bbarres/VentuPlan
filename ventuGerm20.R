@@ -62,10 +62,10 @@ for (j in 1:length(SAlist)) {
                    data=tempdat,
                    fct=LL.3())
       plot(temp.m1,ylim=c(0,110),xlim=c(0,50),
-           main=paste(data_subSA$bioagr_id[1],
+           main=paste(tempdat$bioagr_id[1],
                       SAlist[j],names(table(SA.dat$ech_id))[i]))
       temp<-ED(temp.m1,c(50,5,1),type="absolute")
-      tempx<-data.frame("Species"=data_subSA$bioagr_id[1],
+      tempx<-data.frame("Species"=tempdat$bioagr_id[1],
                         "Subs_Act"=SAlist[j],
                         "sample_ID"=names(table(SA.dat$ech_id))[i],
                         "read_time"=data_subSA$tps_expo[1],
